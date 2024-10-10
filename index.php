@@ -1,70 +1,51 @@
 <?php
 
-require_once('./order/controller/IndexController.php');
-require_once('./order/controller/ProcessOrderCreateController.php');
-require_once('./order/controller/PayController.php');
-require_once('./order/controller/ProcessPaymentController.php');
-require_once('./order/controller/ProcessShippingAddressController.php');
-require_once('./order/controller/ProcessShippingMethodController.php');
-require_once('./order/controller/SetShippingAddressController.php');
-require_once('./order/controller/SetShippingMethodController.php');
+require_once('./order/controller/ControllerRegistry.php');
 
 // Récupère l'url actuelle et supprime le chemin de base
-// c'est à dire : http://localhost:8888/projet-methodo-tp-1/public/
-// donc cela ne garde que la fin de l'url
-
 $requestUri = $_SERVER['REQUEST_URI'];
 $uri = parse_url($requestUri, PHP_URL_PATH);
 $endUri = str_replace('/projet-methodo-tp-1/', '', $uri);
 $endUri = trim($endUri, '/');
 
+$orderControllers = new OrderControllerRegistry();
 
-if($endUri === "") {
-    $indexController = new IndexController();
-    $indexController->index();
-    return;
-} 
+switch ($endUri) {
+    case "":
+        $orderControllers->indexController->index();
+        break;
 
-if($endUri === "create-order") {
-    $createOrderController = new CreateOrderController();
-    $createOrderController->createOrder();
-    return;
-}  
+    case "create-order":
+        $orderControllers->createOrderController->createOrder();
+        break;
 
+    case "pay":
+        $orderControllers->payController->pay();
+        break;
 
-if ($endUri === "pay") {
-    $payController = new PayController();
-    $payController->pay();
-    return;
-}
+    case "process-payment":
+        $orderControllers->processPaymentController->processPayment();
+        break;
 
+    case "process-shipping-address":
+        $orderControllers->processShippingAddressController->processShippingAddress();
+        break;
 
-if ($endUri === "process-payment") {
-    $payController = new ProcessPaymentController();
-    $payController->processPayment();
-    return;
-}
+    case "process-shipping-method":
+        $orderControllers->processShippingMethodController->processShippingMethod();
+        break;
 
-if ($endUri === "process-shipping-address") {
-    $payController = new ProcessShippingAddressController();
-    $payController->processShippingAddress();
-    return;
-}
+    case "set-shipping-address":
+        $orderControllers->setShippingAddressController->setShippingAddress();
+        break;
 
-if ($endUri === "process-shipping-method") {
-    $payController = new ProcessShippingMethodController();
-    $payController->processShippingMethod();
-    return;
-}
+    case "set-shipping-method":
+        $orderControllers->setShippingMethodController->setShippingMethod();
+        break;
 
-if ($endUri === "set-shipping-address") {
-    $payController = new SetShippingAddressController();
-    $payController->setShippingAddress();
-    return;
-}
-
-if ($endUri === "set-shipping-method") {
-    $payController = new SetShippingMethodController();
-    $payController->setShippingMethod();
-    return;
+    default:
+        // Gestion des erreurs ou des routes non trouvées
+        http_response_code(404);
+        echo "404 Not Found";
+        break;
 }
