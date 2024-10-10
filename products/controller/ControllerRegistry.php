@@ -1,14 +1,19 @@
 <?php
 
-require_once './homePage/controller/IndexController.php';    
+require_once('./products/controller/ProductFormController.php'); 
+require_once('./products/controller/ProcessProductCreate.php');
 
 
-class HomePageControllerRegistry {
 
-    public $indexController;
+class ProductsControllerRegistry {
+
+    public $productForm;
+
+    public $createProduct;
 
     public function __construct() {
-        $this->indexController = new IndexController();
+        $this->productForm = new ProductFormController();
+        $this->createProduct = new CreateProductController();
     }
 
 }

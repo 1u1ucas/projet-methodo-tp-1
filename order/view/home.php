@@ -1,7 +1,9 @@
 <?php require_once('./order/view/partials/header.php'); ?>
 <main>
 
-		<form method="POST" action="http://localhost:8888/projet-methodo-tp-1/create-order">
+		<h1>Créer une commande</h1>
+
+		<form method="POST" action="/projet-methodo-tp-1/create-order">
 
 			<label for="customerName">Nom du client</label>
 			<input type="text" id="customerName" name="customerName" required>

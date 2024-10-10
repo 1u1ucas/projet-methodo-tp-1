@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 require_once('./homePage/controller/ControllerRegistry.php');
 require_once('./order/controller/ControllerRegistry.php');
+require_once('./products/controller/ControllerRegistry.php');
 
 
 // Récupère l'url actuelle et supprime le chemin de base
@@ -15,12 +16,28 @@ $endUri = trim($endUri, '/');
 
 $homePageControllers = new homePageControllerRegistry();
 $orderControllers = new OrderControllerRegistry();
+$productControllers = new ProductsControllerRegistry();
 
 
 switch ($endUri) {
+
+    // Route pour la page d'accueil
+
     case "":
         $homePageControllers->indexController->index();
         break;
+
+    // Route pour les produits
+
+    case "product-form":
+        $productControllers->productForm->productForm();
+        break;
+    case "create-product":
+        $productControllers->createProduct->createProduct();
+        break;
+
+
+    // Route pour les commandes
 
     case "order-home":
         $orderControllers->orderHomeController->orderHome();

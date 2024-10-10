@@ -12,6 +12,7 @@
 			<ul>
 				<li><a href="/projet-methodo-tp-1/">Menu</a></li>
 				<li><a href="/projet-methodo-tp-1/order-home">Commander</a></li>
+				<li><a href="/projet-methodo-tp-1/product-form">Crée un produit</a></li>
 
 
 			</ul>
