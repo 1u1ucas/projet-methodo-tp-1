@@ -26,6 +26,10 @@ class ProductsRepository {
 		return $_SESSION['products'][$productId];
 	}
 
+	public function getAllProducts(): array {
+		return $_SESSION['products'];
+	}
+
 
 
 }

@@ -26,4 +26,13 @@ class OrderRepository {
 		return $_SESSION['order'];
 	}
 
+	public function getAllProducts(): array {
+		return $_SESSION['products'];
+	}
+
+	public function getProductById(string $productId): Products {
+		return $_SESSION['products'][$productId];
+	}
+
+
 }

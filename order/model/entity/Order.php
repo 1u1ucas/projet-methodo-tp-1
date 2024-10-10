@@ -1,5 +1,7 @@
 <?php
 
+require_once('./products/model/entity/Products.php');
+require_once('./order/model/repository/OrderRepository.php');
 class Order {
 
 	public static $CART_STATUS = "CART";
@@ -8,7 +10,6 @@ class Order {
 	public static $PAID_STATUS = "PAID";
 	public static $MAX_PRODUCTS_BY_ORDER = 5;
 	public static $BLACKLISTED_CUSTOMERS = ['David Robert'];
-	public static $UNIQUE_PRODUCT_PRICE = 5;
 	public static $AUTORIZED_SHIPPING_COUNTRIES = ['France', 'Belgique', 'Luxembourg'];
 	public static $AVAILABLE_SHIPPING_METHODS = ['Chronopost Express', 'Point relais', 'Domicile'];
 	public static $PAID_SHIPPING_METHOD = 'Chronopost Express';
@@ -48,13 +49,27 @@ class Order {
 		$this->id = rand();
 		$this->products = $products;
 		$this->customerName = $customerName;
-		$this->totalPrice = count($products) * Order::$UNIQUE_PRODUCT_PRICE;
+		$this->totalPrice = $this->calculateTotalCart();
 	}
 
 
 
 	private function calculateTotalCart():  float {
-		return count($this->products) * Order::$UNIQUE_PRODUCT_PRICE;
+		$this->totalPrice = 0.0;
+    foreach ($this->products as $productId) {
+
+		$productsRepository = new OrderRepository();
+		$product = $productsRepository->getProductById($productId);
+		
+
+        if (method_exists($product, 'getPrice')) {
+            $this->totalPrice += $product->getPrice();
+        } else {
+            throw new Exception("Le produit n'a pas de prix défini",
+		var_dump($product));
+        }
+    }
+    return $this->totalPrice;
 	}
 
 

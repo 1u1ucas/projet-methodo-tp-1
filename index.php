@@ -35,12 +35,15 @@ switch ($endUri) {
     case "create-product":
         $productControllers->createProduct->createProduct();
         break;
+    case "view-product":
+        $productControllers->viewProduct->viewProduct();
+        break;
 
 
     // Route pour les commandes
 
-    case "order-home":
-        $orderControllers->orderHomeController->orderHome();
+    case "order-form":
+        $orderControllers->orderFormController->orderForm();
         break;
 
     case "create-order":
