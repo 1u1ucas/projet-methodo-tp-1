@@ -1,6 +1,11 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require_once('./homePage/controller/ControllerRegistry.php');
 require_once('./order/controller/ControllerRegistry.php');
+
 
 // Récupère l'url actuelle et supprime le chemin de base
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -8,11 +13,17 @@ $uri = parse_url($requestUri, PHP_URL_PATH);
 $endUri = str_replace('/projet-methodo-tp-1/', '', $uri);
 $endUri = trim($endUri, '/');
 
+$homePageControllers = new homePageControllerRegistry();
 $orderControllers = new OrderControllerRegistry();
+
 
 switch ($endUri) {
     case "":
-        $orderControllers->indexController->index();
+        $homePageControllers->indexController->index();
+        break;
+
+    case "order-home":
+        $orderControllers->orderHomeController->orderHome();
         break;
 
     case "create-order":

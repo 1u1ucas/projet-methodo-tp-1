@@ -1,6 +1,6 @@
 <?php
 
-require_once('./order/controller/IndexController.php');
+require_once('./order/controller/OrderHomeController.php');
 require_once('./order/controller/ProcessOrderCreateController.php');
 require_once('./order/controller/PayController.php');
 require_once('./order/controller/ProcessPaymentController.php');
@@ -12,7 +12,7 @@ require_once('./order/controller/SetShippingMethodController.php');
 
 
 class OrderControllerRegistry {
-    public $indexController;
+    public $orderHomeController;
     public $createOrderController;
     public $payController;
     public $processPaymentController;
@@ -22,7 +22,7 @@ class OrderControllerRegistry {
     public $setShippingMethodController;
 
     public function __construct() {
-        $this->indexController = new IndexController();
+        $this->orderHomeController = new OrderHomeController();
         $this->createOrderController = new CreateOrderController();
         $this->payController = new PayController();
         $this->processPaymentController = new ProcessPaymentController();
