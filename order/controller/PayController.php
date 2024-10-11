@@ -19,7 +19,9 @@ class PayController
                 $products[] = $product;
             }
         }
+        
 
+        $orderInfos = $order->getOrderInfos();
 
 		
 

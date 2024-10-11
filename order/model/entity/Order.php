@@ -1,7 +1,5 @@
 <?php
 
-require_once('./products/model/entity/Products.php');
-require_once('./order/model/repository/OrderRepository.php');
 class Order {
 
 	public static $CART_STATUS = "CART";
@@ -50,6 +48,10 @@ class Order {
 		$this->products = $products;
 		$this->customerName = $customerName;
 		$this->totalPrice = $this->calculateTotalCart($products);
+		$this->shippingAddress = null;
+		$this->shippingCity = null;
+		$this->shippingCountry = null;
+		$this->shippingMethod = null;
 	}
 
 
@@ -151,17 +153,46 @@ class Order {
 		$this->status = Order::$PAID_STATUS;
 	}
 
-	public function getProducts(): array {
-		return $this->products;
-	}
+	public function getOrderInfos(): string {
 
-	public function getCustomerName(): string {
-		return $this->customerName;
-	}
+		$customerName = $this->customerName;
+		$productsIds = $this->products;
+		$shippingAddress = $this->shippingAddress;
+		$shippingCity = $this->shippingCity;
+		$shippingCountry = $this->shippingCountry;
+		$shippingMethod = $this->shippingMethod;
+		$totalPrice = $this->totalPrice;
+		$orderInfo = '';
 
-	public function getTotalPrice(): float {
-		return $this->totalPrice;
-	}
+
+		$orderRepository = new OrderRepository();
+		foreach ($productsIds as $productId) {
+			$products[] = $orderRepository->getProductById($productId);
+		}
+
+		$productsList = '<ul>';
+
+		foreach ($products as $product) {
+		$productTitle = $product->getTitle();
+		$productPrice = $product->getPrice();
+		$productsList .= '<li>' . htmlspecialchars($productTitle) . ' - ' . htmlspecialchars($productPrice) . ' €</li>';
+		}
+		$productsList .= '</ul>';
+		if (!empty($shippingAddress) || !empty($shippingCity) || !empty($shippingCountry)) {
+			$orderInfo .= '<p>Adresse de livraison : ' . htmlspecialchars($shippingAddress) . ', ' . htmlspecialchars($shippingCity) . ', ' . htmlspecialchars($shippingCountry) . '</p>';
+		};
+
+		if (!empty($shippingMethod)) {
+			$orderInfo .= '<p>Méthode de livraison : ' . htmlspecialchars($shippingMethod) . '</p>';
+		};
+
+		return
+		'<p>Nom du client : ' . htmlspecialchars($customerName) . '</p>
+		<p>Produits : ' . $productsList . '</p>'. 
+		$orderInfo .
+		'<p>Prix total : ' . htmlspecialchars($totalPrice) . ' €</p>';
+		
+		}
 }
 
 
