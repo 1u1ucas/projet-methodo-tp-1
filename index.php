@@ -1,6 +1,20 @@
 <?php
 
 // gestion des erreurs   
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
+function handleException($exception) {
+    // Rediriger vers la page d'erreur avec le message d'erreur
+    $errorMessage = urlencode($exception->getMessage());
+    require_once('./homePage/view/error.php');
+    exit();
+}
+
+
+set_exception_handler('handleException');
+
 
 require_once('./homePage/model/router/homePage-router.php'); // Charger HomePageRouter
 require_once('./order/model/router/order-router.php'); // Charger OrderRouter

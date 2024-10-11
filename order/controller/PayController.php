@@ -6,17 +6,26 @@ class PayController
 {
     public function pay()
     {
+        try {
+
         $orderRepository = new OrderRepository();
         $order = $orderRepository->find();
+
+
         $productIds =  $order->getProducts() ;
         $products = [];
+
 
         $productRepository = new ProductsRepository();
 
         foreach ($productIds as $productId) {
-            $product = $productRepository->getProductById($productId);
-            if ($product) {
-                $products[] = $product;
+            if (is_string($productId)) {
+
+            
+                $product = $productRepository->getProductById($productId);
+                if ($product) {
+                    $products[] = $product;
+                }
             }
         }
         
@@ -31,5 +40,8 @@ class PayController
         }
 
         require_once './order/view/pay.php';
+    } catch (Exception $e) {
+        handleException($e);
+    }
     }
 }

@@ -18,8 +18,6 @@ class Order {
 	private string $customerName;
 
 	private float $totalPrice;
-
-	private int $id;
 	private DateTime $createdAt;
 
 	private string $status;
@@ -44,7 +42,6 @@ class Order {
 
 		$this->status = Order::$CART_STATUS;
 		$this->createdAt = new DateTime();
-		$this->id = rand();
 		$this->products = $products;
 		$this->customerName = $customerName;
 		$this->totalPrice = $this->calculateTotalCart($products);
@@ -58,22 +55,19 @@ class Order {
 
 	private function calculateTotalCart($products):  float {
 		$this->totalPrice = 0.0;
-    foreach ($products as $productId) {
+        $orderRepository = new OrderRepository();
 
-		$productsRepository = new OrderRepository();
-		$product = $productsRepository->getProductById($productId);
+        foreach ($this->products as $productId) {
+            $product = $orderRepository->getProductById($productId);
 
-	
-		
-
-        if (method_exists($product, 'getPrice')) {
-            $this->totalPrice += $product->getPrice();
-        } else {
-            throw new Exception("Le produit n'a pas de prix défini");
+            if (method_exists($product, 'getPrice')) {
+                $this->totalPrice += $product->getPrice();
+            } else {
+                throw new Exception("Le produit n'a pas de prix défini");
+            }
         }
+        return $this->totalPrice;
     }
-    return $this->totalPrice;
-	}
 
 
 	public function removeProduct(string $product) {
@@ -91,23 +85,21 @@ class Order {
 	}
 
 
-	public function addProduct(string $product): void {
+	public function addProduct(string $productId) {
 
-		if ($this->isProductInCart($product)) {
-			throw new Exception('Le produit existe déjà dans le panier');
-		}
-
-		if ($this->status === Order::$CART_STATUS) {
-			throw new Exception('Vous ne pouvez plus ajouter de produits');
-		}
 
 		if (count($this->products) >= Order::$MAX_PRODUCTS_BY_ORDER) {
-			throw new Exception('Vous ne pouvez pas commander plus de ' . Order::$MAX_PRODUCTS_BY_ORDER .' produits');
+			throw new Exception("Vous ne pouvez pas commander plus de " . Order::$MAX_PRODUCTS_BY_ORDER . " produits");
 		}
 
-		$this->products[] = $product;
-		$this->totalPrice = $this->calculateTotalCart($product);
-	}
+        foreach ($this->products as $existingProduct) {
+            if ($existingProduct === $productId) {
+                throw new Exception("Le produit existe déjà dans le panier");
+            }
+        }
+        $this->products[] = $productId;
+        $this->totalPrice = $this->calculateTotalCart($productId);
+    }
 
 	private function isProductInCart(string $product): bool {
 		return in_array($product, $this->products);
@@ -151,6 +143,10 @@ class Order {
 		}
 
 		$this->status = Order::$PAID_STATUS;
+	}
+
+	public function getProducts(): array {
+		return $this->products;
 	}
 
 	public function getOrderInfos(): string {

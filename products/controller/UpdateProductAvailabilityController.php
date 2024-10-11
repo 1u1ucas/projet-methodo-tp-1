@@ -20,7 +20,7 @@ try {
     require_once './products/view/product-view-all.php';
     exit;
 } catch (Exception $e) {
-    echo "Erreur : " . $e->getMessage();
+    handleException($e);
 }
     }
 }

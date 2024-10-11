@@ -7,6 +7,7 @@ class ProcessShippingAddressController
 {
     public function processShippingAddress()
     {
+        try {
        
         $orderRepository = new OrderRepository();
         $order = $orderRepository->find();
@@ -16,7 +17,6 @@ class ProcessShippingAddressController
             return;
         }
 
-        try {
             
             if (!isset($_POST['shippingCountry']) || 
                 !isset($_POST['shippingCity']) || 
@@ -39,8 +39,7 @@ class ProcessShippingAddressController
             require_once './order/view/shipping-address-added.php';
 
         } catch (Exception $e) {
-            $errorMessage = $e->getMessage();
-            require_once './order/view/order-error.php';
+            handleException($e);
         }
     }
 }

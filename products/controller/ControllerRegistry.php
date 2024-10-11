@@ -5,6 +5,7 @@ require_once('./products/controller/ProcessProductCreate.php');
 require_once('./products/controller/ViewProductAvailableController.php');
 require_once('./products/controller/ViewAllProductController.php');
 require_once('./products/controller/UpdateProductAvailabilityController.php');
+require_once('./products/controller/ProductAddToOrderController.php');
 
 
 
@@ -20,12 +21,15 @@ class ProductsControllerRegistry {
 
     public $updateProductAvailability;
 
+    public $productAddToOrder;
+
     public function __construct() {
         $this->productForm = new ProductFormController();
         $this->createProduct = new CreateProductController();
         $this->viewProductAvailable = new ViewProductAvailableController();
         $this->viewAllProduct = new ViewAllProductController();
         $this->updateProductAvailability = new UpdateProductAvailabilityController();
+        $this->productAddToOrder = new ProductAddToOrderController();
     }
 
 }

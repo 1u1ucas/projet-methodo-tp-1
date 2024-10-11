@@ -2,6 +2,7 @@
 
 require_once('./homePage/controller/ControllerRegistry.php');
 require_once('./homePage/controller/IndexController.php');
+require_once('./homePage/controller/ErrorController.php');
 
 
 class HomePageRouter {
@@ -17,7 +18,9 @@ class HomePageRouter {
             case "":
                 $this->homePageControllers->indexController->index();
                 break;
-
+            case "error":
+                $this->homePageControllers->errorController->errorController();
+                break;
             default:
                 // Gestion des routes non trouvées pour la page d'accueil
                 http_response_code(404);

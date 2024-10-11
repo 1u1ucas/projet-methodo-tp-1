@@ -7,6 +7,7 @@ class ProcessPaymentController
 {
 	public function processPayment()
 	{
+		try {
 
 		$orderRepository = new OrderRepository();
 		$order = $orderRepository->find();
@@ -16,15 +17,13 @@ class ProcessPaymentController
 			return;
 		}
 
-		try {
-
-			$order->pay();
+		
+		$order->pay();
 			$orderRepository->persist($order);
 			require_once './order/view/paid.php';
 
 		} catch (Exception $e) {
-			$errorMessage = $e->getMessage();
-			require_once './order/view/order-error.php';
+			handleException($e);
 		}
 	}
 }

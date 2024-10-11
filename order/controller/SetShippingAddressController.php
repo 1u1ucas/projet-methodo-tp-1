@@ -6,6 +6,8 @@ class SetShippingAddressController
 {
     public function setShippingAddress()
     {
+        try {
+
         $orderRepository = new OrderRepository();
         $order = $orderRepository->find();
 
@@ -15,5 +17,8 @@ class SetShippingAddressController
         }
 
         require_once './order/view/order-set-shipping-address.php';
+    } catch (Exception $e) {
+        handleException($e);
+    }
     }
 }

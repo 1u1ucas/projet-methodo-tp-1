@@ -36,6 +36,9 @@ class ProductRouter {
             case "product-update-availability":
                 $this->productControllers->updateProductAvailability->updateProductAvailability();
                 break;
+            case "product-add-to-order":
+                $this->productControllers->productAddToOrder->productAddToOrderController();
+                break;
 
             default:
                 // Gestion des routes non trouvées pour les produits

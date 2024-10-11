@@ -8,6 +8,7 @@ class ProcessShippingMethodController
 {
     public function processShippingMethod()
     {
+        try {
         
         $orderRepository = new OrderRepository();
         $order = $orderRepository->find();
@@ -17,7 +18,6 @@ class ProcessShippingMethodController
             return;
         }
 
-        try {
            
             if (!isset($_POST['shippingMethod'])) {
                 $errorMessage = "Merci de remplir les champs. J'ai pas fait tout ça pour rien.";
@@ -35,8 +35,7 @@ class ProcessShippingMethodController
             require_once './order/view/shipping-method-added.php';
 
         } catch (Exception $e) {
-            $errorMessage = $e->getMessage();
-            require_once './order/view/order-error.php';
+            handleException($e);
         }
     }
 }

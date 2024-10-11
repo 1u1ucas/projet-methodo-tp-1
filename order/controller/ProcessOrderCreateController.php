@@ -27,8 +27,7 @@ class CreateOrderController {
 			require_once './order/view/order-created.php';
 
 		} catch (Exception $e) {
-			$errorMessage = $e->getMessage();
-			require_once './order/view/order-error.php';
+			handleException($e);
 		}
 
 

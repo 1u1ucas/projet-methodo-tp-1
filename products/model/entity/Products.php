@@ -78,5 +78,37 @@ class Products {
     public function getProductId(): string {
         return $this->productId;
     }
+
+    public function getAvailableProducts($product): string {
+
+        $orderRepository = new OrderRepository();
+        $order = $orderRepository->find();
+
+        $productsList = '';
+        
+            if (!$product->isAvailable()) {
+                return '';
+            }
+
+            $existingProductIds = $order ? $order->getProducts() : [];
+            $productId = $product->getProductId();
+            $productsList .= '<td>' . $product->getTitle() . '</td>';
+            $productsList .= '<td>' . $product->getPrice() . '</td>';
+            $productsList .= '<td>' . $product->getDescription() . '</td>';
+            $productsList .= '<td>';
+            if (!in_array($productId, $existingProductIds)) {
+                $productsList .= '<form action="/projet-methodo-tp-1/product-add-to-order" method="post">';
+                $productsList .= '<input type="hidden" name="productId" value="' . htmlspecialchars($productId) . '">';
+                $productsList .= '<button type="submit" class="btn btn-primary">Ajouter à la commande</button>';
+                $productsList .= '</form>';
+            } else {
+                $productsList .= '<span>Déjà dans la commande</span>';
+            }
+            $productsList .= '</td>';
+        
+        
+
+        return $productsList;
+    }
 }
 
