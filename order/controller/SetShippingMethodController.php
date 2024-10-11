@@ -16,6 +16,6 @@ class SetShippingMethodController
             return;
         }
 
-        require_once './order/view/set-shipping-method.php';
+        require_once './order/view/order-set-shipping-method.php';
     }
 }

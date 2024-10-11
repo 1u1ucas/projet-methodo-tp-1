@@ -7,7 +7,7 @@ require_once('./products/model/repository/ProductsRepository.php');
 
 		<h1>Créer une commande</h1>
 
-		<form method="POST" action="/projet-methodo-tp-1/create-order">
+		<form method="POST" action="/projet-methodo-tp-1/order-create">
 
 			<label for="customerName">Nom du client</label>
 			<input type="text" id="customerName" name="customerName" required>

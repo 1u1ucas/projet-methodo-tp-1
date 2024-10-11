@@ -4,7 +4,7 @@
 class ViewProductAvailableController {
 
 	public function viewProductAvailable() {
-		require_once('./products/view/view-product-available.php');
+		require_once('./products/view/product-available-view.php');
 	}
 
 }

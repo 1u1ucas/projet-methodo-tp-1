@@ -15,7 +15,7 @@
 			<ul>
 				<li><a href="/projet-methodo-tp-1/">Menu</a></li>
 				<li><a href="/projet-methodo-tp-1/order-form">Commander</a></li>
-				<li><a href="/projet-methodo-tp-1/view-product-available">Liste des produits</a></li>
+				<li><a href="/projet-methodo-tp-1/product-available-view">Liste des produits</a></li>
 
 
 			</ul>

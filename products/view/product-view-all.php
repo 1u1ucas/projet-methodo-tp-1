@@ -27,7 +27,7 @@ require_once './products/view/partials/header.php' ;
                     <td><?php echo $product->getPrice(); ?></td>
                     <td><?php echo $product->getDescription(); ?></td>
                     <td>
-                        <form method="POST" action="/projet-methodo-tp-1/update-product-availability">
+                        <form method="POST" action="/projet-methodo-tp-1/product-update-availability">
                             <input type="hidden" name="productId" value="<?php echo htmlspecialchars($product->getProductId()); ?>">
                             <input type="checkbox" name="isAvailable" value="1" <?php echo $product->isAvailable() ? 'checked' : ''; ?> onchange="this.form.submit()">
                         </form>

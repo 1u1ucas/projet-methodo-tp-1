@@ -17,7 +17,7 @@ try {
     $productRepository = new ProductsRepository();
     $productRepository->updateProductAvailability($productId, $isAvailable);
 
-    require_once './products/view/view-all-product.php';
+    require_once './products/view/product-view-all.php';
     exit;
 } catch (Exception $e) {
     echo "Erreur : " . $e->getMessage();

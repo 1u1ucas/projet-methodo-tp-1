@@ -14,6 +14,6 @@ class SetShippingAddressController
             return;
         }
 
-        require_once './order/view/set-shipping-address.php';
+        require_once './order/view/order-set-shipping-address.php';
     }
 }

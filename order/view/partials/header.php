@@ -15,9 +15,9 @@
 			<ul>
 				<li><a href="/projet-methodo-tp-1/">Menu</a></li>
 				<li><a href="/projet-methodo-tp-1/order-form">Commander</a></li>
-				<li><a href="/projet-methodo-tp-1/set-shipping-address">Renseigner l'adresse de livraion</a></li>
-				<li><a href="/projet-methodo-tp-1/set-shipping-method">Renseigner la méthode de livraison</a></li>
-				<li><a href="/projet-methodo-tp-1/pay">Payer</a></li>
+				<li><a href="/projet-methodo-tp-1/order-set-shipping-address">Renseigner l'adresse de livraion</a></li>
+				<li><a href="/projet-methodo-tp-1/order-set-shipping-method">Renseigner la méthode de livraison</a></li>
+				<li><a href="/projet-methodo-tp-1/order-pay">Payer</a></li>
 
 
 			</ul>

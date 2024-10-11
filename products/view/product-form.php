@@ -3,7 +3,7 @@
 <main>
 
     <h1>crée un produit</h1>
-    <form action="/projet-methodo-tp-1/create-product" method="post">
+    <form action="/projet-methodo-tp-1/product-create" method="post">
         <div class="form-group">
             <label for="title">Titre</label>
             <input type="text" class="form-control" id="title" name="title" required>

@@ -39,7 +39,7 @@ if ($order === null) {
     	<p>Prix total : <?= htmlspecialchars($order->getTotalPrice()) ?> €</p>	
 
 
-		<form method="POST" action="/projet-methodo-tp-1/process-payment">
+		<form method="POST" action="/projet-methodo-tp-1/order-process-payment">
 
 			<label for="payment"></label>
 
