@@ -30,6 +30,14 @@ class ProductsRepository {
 		return $_SESSION['products'];
 	}
 
+	public function updateProductAvailability(string $productId, bool $isAvailable): void {
+		if (isset($_SESSION['products'][$productId])) {
+			$_SESSION['products'][$productId]->setAvailable($isAvailable);
+		} else {
+			throw new Exception("Produit non trouvé pour l'ID: $productId");
+		}
+	}
+
 
 
 }

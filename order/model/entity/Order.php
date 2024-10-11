@@ -49,24 +49,25 @@ class Order {
 		$this->id = rand();
 		$this->products = $products;
 		$this->customerName = $customerName;
-		$this->totalPrice = $this->calculateTotalCart();
+		$this->totalPrice = $this->calculateTotalCart($products);
 	}
 
 
 
-	private function calculateTotalCart():  float {
+	private function calculateTotalCart($products):  float {
 		$this->totalPrice = 0.0;
-    foreach ($this->products as $productId) {
+    foreach ($products as $productId) {
 
 		$productsRepository = new OrderRepository();
 		$product = $productsRepository->getProductById($productId);
+
+	
 		
 
         if (method_exists($product, 'getPrice')) {
             $this->totalPrice += $product->getPrice();
         } else {
-            throw new Exception("Le produit n'a pas de prix défini",
-		var_dump($product));
+            throw new Exception("Le produit n'a pas de prix défini");
         }
     }
     return $this->totalPrice;
@@ -75,7 +76,7 @@ class Order {
 
 	public function removeProduct(string $product) {
 		$this->removeProductFromList($product);
-		$this->totalPrice = $this->calculateTotalCart();
+		$this->totalPrice = $this->calculateTotalCart($product);
 
 		$productsAsString = implode(',', $this->products);
 		echo "Liste des produits : {$productsAsString}</br></br>";
@@ -103,7 +104,7 @@ class Order {
 		}
 
 		$this->products[] = $product;
-		$this->totalPrice = $this->calculateTotalCart();
+		$this->totalPrice = $this->calculateTotalCart($product);
 	}
 
 	private function isProductInCart(string $product): bool {
@@ -148,6 +149,18 @@ class Order {
 		}
 
 		$this->status = Order::$PAID_STATUS;
+	}
+
+	public function getProducts(): array {
+		return $this->products;
+	}
+
+	public function getCustomerName(): string {
+		return $this->customerName;
+	}
+
+	public function getTotalPrice(): float {
+		return $this->totalPrice;
 	}
 }
 

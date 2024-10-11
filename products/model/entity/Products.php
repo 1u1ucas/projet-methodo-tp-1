@@ -71,6 +71,10 @@ class Products {
         return $this->isAvailable;
     }
 
+    public function setAvailable(bool $isAvailable): void {
+        $this->isAvailable = $isAvailable;
+    }
+
     public function getProductId(): string {
         return $this->productId;
     }

@@ -23,9 +23,10 @@ require_once('./products/model/repository/ProductsRepository.php');
 			
             if (!empty($products)) {
                 foreach ($products as $product) {
-					
+					$productId = $product->getProductId();
 
                     if ($product->isAvailable()) {
+						
                         echo '<option value="' . htmlspecialchars($productId) . '">' . htmlspecialchars($product->getTitle()) . ' - ' . htmlspecialchars($product->getPrice()) . ' €</option>';
                     }
                 }

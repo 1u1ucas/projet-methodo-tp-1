@@ -1,7 +1,6 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//gestion des erreurs   
 
 require_once('./homePage/controller/ControllerRegistry.php');
 require_once('./order/controller/ControllerRegistry.php');
@@ -35,9 +34,15 @@ switch ($endUri) {
     case "create-product":
         $productControllers->createProduct->createProduct();
         break;
-    case "view-product":
-        $productControllers->viewProduct->viewProduct();
+    case "view-product-available":
+        $productControllers->viewProductAvailable->viewProductAvailable();
         break;
+    case "view-all-product":
+        $productControllers->viewAllProduct->viewAllProduct();
+        break;
+    case "update-product-availability":
+        $productControllers->updateProductAvailability->updateProductAvailability();
+        break;  
 
 
     // Route pour les commandes
