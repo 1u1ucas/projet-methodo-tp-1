@@ -47,7 +47,8 @@ class CreateProductController{
 
 
 
-			require_once './products/view/confirm-product.php';
+
+			require_once './products/view/product-confirm.php';
 
 		} catch (Exception $e) {
 			$errorMessage = $e->getMessage();

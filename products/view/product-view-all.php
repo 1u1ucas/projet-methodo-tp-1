@@ -10,8 +10,7 @@ require_once './products/view/partials/header.php' ;
     <table class="table">
         <tbody>
             <?php 
-                $productRepository = new ProductsRepository();
-                $products = $productRepository->getAllProducts();
+                
 
                 if (empty($products)) : 
                     ?>

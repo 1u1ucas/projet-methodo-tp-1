@@ -1,14 +1,6 @@
 <?php 
 require_once('./order/view/partials/header.php'); 
 
-$orderRepository = new OrderRepository();
-$order = $orderRepository->find();
-
-if ($order === null) {
-	var_dump($_SESSION);
-	exit;
-}
-
 ?>
 	
 	<main>
@@ -22,12 +14,10 @@ if ($order === null) {
 		<p>Produits : </p>
 		<ul>
 
-			<?php $products =  $order->getProducts() ;
-			?>
+			
 
 			<?php foreach ($products as $product) : 
 				
-				$product = $orderRepository->getProductById($product);
 				$productTitle = $product->getTitle();
 				$productPrice = $product->getPrice();
 				

@@ -9,9 +9,7 @@ require_once './products/model/repository/ProductsRepository.php' ;
 
     <table class="table">
         <tbody>
-            <?php 
-                $productRepository = new ProductsRepository();
-                $products = $productRepository->getAllProducts();
+            <?php
 
                 if (empty($products)) : 
                     ?>

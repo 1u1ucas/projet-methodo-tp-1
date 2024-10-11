@@ -17,10 +17,6 @@ require_once('./products/model/repository/ProductsRepository.php');
 
 			<select id="product" name="products[]" multiple>
             <?php
-            $productsRepository = new ProductsRepository();
-			$products = $productsRepository->getAllProducts();
-
-			
             if (!empty($products)) {
                 foreach ($products as $product) {
 					$productId = $product->getProductId();

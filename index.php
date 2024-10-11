@@ -1,6 +1,9 @@
 <?php
 
 // gestion des erreurs   
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 require_once('./homePage/model/router/homePage-router.php'); // Charger HomePageRouter
 require_once('./order/model/router/order-router.php'); // Charger OrderRouter

@@ -8,6 +8,20 @@ class PayController
     {
         $orderRepository = new OrderRepository();
         $order = $orderRepository->find();
+        $productIds =  $order->getProducts() ;
+        $products = [];
+
+        $productRepository = new ProductsRepository();
+
+        foreach ($productIds as $productId) {
+            $product = $productRepository->getProductById($productId);
+            if ($product) {
+                $products[] = $product;
+            }
+        }
+
+
+		
 
         if (!$order) {
             require_once './order/view/404.php';

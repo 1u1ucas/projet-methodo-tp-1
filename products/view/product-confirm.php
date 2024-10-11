@@ -1,9 +1,7 @@
 <?php require_once('./products/view/partials/header.php'); 
 
 
-$productId = $_SESSION['lastProductId'];
 
-$product = $productRepository->getProductById($productId);
 ?>
 
 <main>
