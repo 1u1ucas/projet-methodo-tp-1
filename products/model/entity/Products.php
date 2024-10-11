@@ -8,7 +8,7 @@ class Products {
 
 	private float $price;
 
-	private int $id;
+	private string $id;
 	private DateTime $createdAt;
 
 	private bool $isAvailable;
